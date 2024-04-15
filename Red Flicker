@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red Flicker Experience</title>
+<style>
+  body {
+    text-align: center;
+    margin: 0;
+    padding: 0; /* Ensures content is aligned at the top */
+    font-family: Arial, sans-serif;
+  }
+
+  h1, h2, h3, p {
+    margin: 10px 0; /* Keeps text content compact */
+  }
+
+  .content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Ensures content starts from the top */
+    flex-wrap: wrap; /* Allows for a responsive layout */
+    gap: 10px; /* Provides space between the video and images */
+    padding-top: 20px; /* Adds a bit of padding at the top for spacing */
+  }
+
+  .video-container {
+    flex: 1 1 auto;
+    position: relative;
+    width: 480px; /* Video width, adjusted for balance with larger images */
+    height: 270px; /* Maintains a 16:9 aspect ratio */
+  }
+
+  .video-container iframe {
+    width: 100%; /* Ensures the video fills the container */
+    height: 100%;
+  }
+
+  .image-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    max-width: 200px; /* Increased size of images */
+    height: auto; /* Maintains aspect ratio */
+  }
+
+  #play-fullscreen-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #ff0000; /* Red button for Red Flicker Experience */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+
+</style>
+</head>
+<body>
+
+<h1>Flicker Experience</h1>
+<h2>Duration: 10 Minutes</h2>
+<h3>Please do not view if you are photosensitive</h3>
+<p>This experience is based on the Flicker video.<br>
+If at any time you feel uncomfortable or want the flicker to stop, you can exit fullscreen mode.<br>
+Press the button below when you're ready.</p>
+
+<div class="content-wrapper">
+  <div class="image-side">
+    <img src="AlteredStatesLab_Borderless_h300.png" alt="Altered States Lab">
+  </div>
+
+  <div class="video-container" id="video-container">
+    <iframe src="https://www.youtube.com/embed/o9_Sd-61z2c" frameborder="0" allow="autoplay; fullscreen"></iframe>
+  </div>
+
+  <div class="image-side">
+    <img src="mq_logo_h300.png" alt="MQ Logo">
+  </div>
+</div>
+
+<button id="play-fullscreen-button">Start Experience</button>
+
+<script>
+document.getElementById('play-fullscreen-button').addEventListener('click', function() {
+  var videoContainer = document.getElementById('video-container');
+  videoContainer.style.display = 'flex';
+  
+  if (document.fullscreenEnabled) {
+    videoContainer.requestFullscreen().catch(err => {
+      console.log(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+      videoContainer.style.display = 'flex';
+    });
+  } else {
+    videoContainer.style.display = 'flex';
+  }
+});
+</script>
+
+</body>
+</html>
